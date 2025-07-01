@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KEITH TECH</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            overflow: hidden;
+            background: #0f1621;
+            color: white;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(100, 200, 255, 0.5);
+            box-shadow: 0 0 10px rgba(100, 200, 255, 0.8);
+        }
+
+        .container {
+            text-align: center;
+            padding: 2rem;
+            backdrop-filter: blur(5px);
+            background: rgba(15, 22, 33, 0.7);
+            border-radius: 15px;
+            border: 1px solid rgba(100, 200, 255, 0.2);
+            box-shadow: 0 0 20px rgba(100, 200, 255, 0.3);
+        }
+
+        h1 {
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #64c8ff;
+            text-shadow: 0 0 10px rgba(100, 200, 255, 0.7);
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .tech-button {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            text-decoration: none;
+            color: #fff;
+            background: linear-gradient(45deg, #0f1621, #1a2a3a);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .tech-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #4facfe, #00f2fe, #64c8ff, #4facfe);
+            background-size: 400%;
+            opacity: 0;
+            transition: 0.5s;
+            z-index: -1;
+            border-radius: 50px;
+        }
+
+        .tech-button:hover::before {
+            opacity: 1;
+            animation: glowing 3s linear infinite;
+        }
+
+        .tech-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(100, 200, 255, 0.4);
+        }
+
+        .tech-button:active {
+            transform: translateY(1px);
+        }
+
+        @keyframes glowing {
+            0% {
+                background-position: 0 0;
+            }
+            50% {
+                background-position: 400% 0;
+            }
+            100% {
+                background-position: 0 0;
+            }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .buttons {
+                flex-direction: column;
+            }
+            
+            .tech-button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg" id="particles"></div>
+    
+    <div class="container">
+        <h1>KEITH PAIR SITE</h1>
+        
+        <div class="buttons">
+            <a href="https://keith-pair-site.onrender.com/" target="_blank" class="tech-button">PARING-CODE</a>
+            <a href="https://whatsapp.com/channel/0029VbANWX1DuMRi1VNPlB0y" target="_blank" class="tech-button">W.A CHANNEL</a>
+            <a href="https://github.com/Kayboy15/KEITH-XMD" target="_blank" class="tech-button">GITHUB REPO</a>
+            <a href="https://t.me/Kayboy15" target="_blank" class="tech-button">CONTACT ME</a>
+        </div>
+    </div>
+    <script>
+        // Create animated particles background
+        document.addEventListener('DOMContentLoaded', function() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                createParticle();
+            }
+            
+            function createParticle() {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random size between 2px and 8px
+                const size = Math.random() * 6 + 2;
+                
+                // Random position
+                const x = Math.random() * window.innerWidth;
+                const y = Math.random() * window.innerHeight;
+                
+                // Random animation duration (10s to 30s)
+                const duration = Math.random() * 20 + 10;
+                
+                // Random delay
+                const delay = Math.random() * 5;
+                
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${x}px`;
+                particle.style.top = `${y}px`;
+                particle.style.animation = `float ${duration}s linear ${delay}s infinite`;
+                
+                particlesContainer.appendChild(particle);
+                
+                // Animate particle
+                animateParticle(particle);
+            }
+            
+            function animateParticle(particle) {
+                let x = parseFloat(particle.style.left);
+                let y = parseFloat(particle.style.top);
+                
+                // Random direction and speed
+                const xSpeed = (Math.random() - 0.5) * 0.5;
+                const ySpeed = (Math.random() - 0.5) * 0.5;
+                
+                function move() {
+                    x += xSpeed;
+                    y += ySpeed;
+                    
+                    // Wrap around if particle goes off screen
+                    if (x > window.innerWidth) x = 0;
+                    if (x < 0) x = window.innerWidth;
+                    if (y > window.innerHeight) y = 0;
+                    if (y < 0) y = window.innerHeight;
+                    
+                    particle.style.left = `${x}px`;
+                    particle.style.top = `${y}px`;
+                    
+                    requestAnimationFrame(move);
+                }
+                
+                move();
+            }
+        });
+    </script>
+</body>
+</html>
